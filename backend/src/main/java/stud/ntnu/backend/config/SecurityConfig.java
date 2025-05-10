@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.context.annotation.Profile;
 
 // TODO: Improve security access configuration
 
@@ -27,6 +28,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
  */
 @Configuration
 @EnableWebSecurity
+@Profile("!test & !unit-test")
 public class SecurityConfig {
 
   /**
@@ -118,9 +120,11 @@ public class SecurityConfig {
                 // Authenticated user endpoints
                 .requestMatchers("/api/user/**").authenticated()
                 .requestMatchers("/topic/**", "/app/**").authenticated()
+                .requestMatchers("/api/quizzes/**").authenticated()
 
                 // Admin endpoints
                 .requestMatchers("/api/admin/**").hasAnyRole("ADMIN", "SUPERADMIN")
+                .requestMatchers("/api/quizzes/admin/**").hasAnyRole("ADMIN", "SUPERADMIN")
 
                 // Super admin endpoints
                 .requestMatchers("/api/super-admin/**").hasRole("SUPERADMIN")

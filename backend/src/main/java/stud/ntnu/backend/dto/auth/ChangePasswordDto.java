@@ -29,14 +29,8 @@ import lombok.NoArgsConstructor;
 public class ChangePasswordDto {
 
   /**
-   * The user's current password. Must be between 8 and 100 characters and contain only allowed
-   * characters.
+   * The user's current password.
    */
-  @Size(min = 8, max = 100, message = "Password must be at between 8 and 100 characters long")
-  @Pattern(
-      regexp = "^[A-Za-z0-9\\p{L}\\p{M}\\p{P}\\p{S}]+$",
-      message = "Invalid password format"
-  )
   private String oldPassword;
 
   /**
@@ -45,7 +39,7 @@ public class ChangePasswordDto {
    */
   @Size(min = 8, max = 100, message = "Password must be at between 8 and 100 characters long")
   @Pattern(
-      regexp = "^[A-Za-z0-9\\p{L}\\p{M}\\p{P}\\p{S}]+$",
+      regexp = "^(?=.*[\\p{L}])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}$",
       message = "Invalid password format"
   )
   private String newPassword;
