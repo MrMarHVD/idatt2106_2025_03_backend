@@ -201,7 +201,7 @@ public class EmailService {
       helper.setSubject(subject);
 
       String emailBody = messageSource.getMessage("safety.confirmation.body",
-          new Object[]{receivingUserName, requestingUserName, token},
+          new Object[]{receivingUserName, requestingUserName, token, backendUrl},
           LocaleContextHolder.getLocale());
 
       helper.setText(emailBody, true);
